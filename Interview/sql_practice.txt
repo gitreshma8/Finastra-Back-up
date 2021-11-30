@@ -1,0 +1,127 @@
+select cusname,cusphone from customer where customer=1 and name='shiva' order by customerid,customername desc
+using alias
+
+select customername as name,customerphone as phone where customerid=1 and customername='siva' order by name desc
+
+distinct-use only one colmn for the a specific row
+
+select distinct customername from customer
+
+
+wild card operators
+select customername from customers where customername like'a%'
+select name from customer where nam like'%a%';
+select ame form customers where name like '%a';
+select name from customers where name like's_m'; 
+select name from customer where name not like 's%a';
+
+runtime (calculated colmn)
+Union and Union All(duplicate values)
+no: of colmns and datatypes should be same when we use this otherwise will get an error
+
+if we have 2 tables--club into 1 table
+select * from customers union orders
+select * from customers union all orders
+
+joins
+
+selet *from customers inner join orders on customer.customerid=orders.customerid
+select *from customers left join orders on customer.customerid=orders.customerid
+select * from customers full outer join orders on customers.customerid=orders.customerid
+
+joins with alias
+
+select product.productname,ancillary.ancillaryname,(ancillary.ancillarycost+product.productcost)as totalcost,(ancillary.ancillarycost+product.productcost)-20 as discountcost  from products cross join ancillary on products.productid=ancillary .productid
+
+select customer.cusrtomername as cusname,product.productname as pname,prodct.productcost,from customer innerjoin products on customer.salesdate=products.salesdate
+
+delete from customers where countryname='norway'
+delete from customers
+select max(price) from products
+
+
+Trigger
+
+create Trigger DisplayTiggerChange
+
+on customer
+
+before Delete,Update,Insert
+As
+Begin
+
+Insert into customers(lastupdatedTime)values(Gettime())
+
+End
+Go
+
+
+with and wihhout parameters for procedures
+
+create procedure selectallcustomers
+
+As
+
+select * from customers
+
+Go
+
+
+Exec selectAllcustomers
+
+create procedure selectallcustomers @city vachar(30),@postalcode varchar(20)
+
+AS
+selec * from customers whre city=@city and postal=@Postalcode
+
+Go
+
+Exec selectAllcustomers @city='london',@postalcode=87677;
+
+1st 2 charactors of emp name from emp table
+select substr(lastname,1,2)as name from employees 
+select substr(fname,1,2)as firstname  from employees
+
+create a new table  which consists of data  and structure copied from the other table
+create table employees as selct * from emp
+Select * from emp
+
+create a new table  with only the structure copied from the other table
+
+create table employee2 as select * from employee where 1=0;
+
+query to fetch 1st N records 
+
+select top * 5 from employees order by employeename
+select * from employee order by employeename limit 5 
+
+1st name and lname in a single colmn as Fllname and fname and lname should be seperated with space
+select concat(fname," ",lastname)as fullname from employees
+
+fetch details of employees whose emp last name ends with an alphabet 's' and contains four alphabets
+
+select * from employees where lastname like '____s';
+
+list al employees excluding the employees with and without fname,"smith" and "blake" from
+
+
+selec * from employees where fnamenot in("smith",flake)
+
+select *from where fname in('smith','flake');
+
+fetch department-wise count of empl sorted by dept count in ascendng oredr
+
+select count(employees)as empcount from employees group by job order by empcount
+
+
+retrieve the duplicate records from a table which means we can use having >than a particulary row data with column count
+
+select * from employees group by employeeid having count(employeeid)>1
+
+
+
+
+
+
+
+
